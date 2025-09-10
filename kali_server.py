@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-# 此脚本将MCP AI代理连接到Kali Linux终端和API服务器。
-
-# 此代码的部分灵感来自 https://github.com/whit3rabbit0/project_astro ，请务必查看该项目
-
 import argparse
 import json
 import logging
