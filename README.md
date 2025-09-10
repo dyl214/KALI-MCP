@@ -1,8 +1,8 @@
 # MCP Kali Server (二次修改版)
 
-**Kali MCP Server (二次修改版)** 是一个轻量级API桥接工具，用于连接MCP客户端与Kali Linux终端，允许执行命令和安全测试工具。本项目基于原始版本进行了二次开发，增强了工具调用能力并优化了中文支持。
+原项目地址https://github.com/Wh0am123/MCP-Kali-Server
 
-本项目是基于原项目的二次修改版本，主要增强了MCP调用Kali工具的种类和数量，提供更全面的安全测试能力。通过AI辅助，可以实时执行渗透测试、解决CTF挑战，或完成HTB/THM等平台的机器测试任务。
+**Kali MCP Server (二次修改版)** 用于连接MCP客户端与Kali Linux终端，允许执行命令和安全测试工具。本项目基于原始版本进行了二次开发，增强了工具调用能力并优化了中文支持。
 
 ## 二次修改主要增强
 - 扩展支持的Kali工具种类，从基础命令扩展到30+专业安全测试工具
@@ -65,20 +65,23 @@
 ### 在MCP客户端上（Windows或Linux）
 运行客户端连接到Kali服务器：（这里使用Trae）
 点击箭头所指
+
 <img width="456" height="184" alt="QQ_1757505425930" src="https://github.com/user-attachments/assets/689b6abe-ecd2-4164-9d4e-6b83779b0f8f" />
+
 使用内置mcp智能体
+
 <img width="493" height="235" alt="QQ_1757505565713" src="https://github.com/user-attachments/assets/d4e24d68-7ac5-43bf-b1e0-ed98e7a12ee5" />
+
 然后需要进行配置，点击创建智能体->MCP->添加->手动添加
+
 <img width="483" height="192" alt="QQ_1757505620373" src="https://github.com/user-attachments/assets/5987b65c-f5d2-4040-9bfd-a556218c8478" />
 
+将下方的json配置放上去即可
 
+<img width="472" height="697" alt="QQ_1757505740329" src="https://github.com/user-attachments/assets/28bc4610-c6ef-4911-ae13-c3bbdc9fbac3" />
 
+然后运行mcp_sever.py，连接kali，向模型说明要求即可
 
-
-
-```bash
-python3 /绝对路径/mcp_server.py http://KALI_IP:5000
-```
 
 #### Claude Desktop配置
 
