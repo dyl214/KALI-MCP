@@ -63,7 +63,19 @@
 ```
 
 ### 在MCP客户端上（Windows或Linux）
-运行客户端连接到Kali服务器：
+运行客户端连接到Kali服务器：（这里使用Trae）
+点击箭头所指
+<img width="456" height="184" alt="QQ_1757505425930" src="https://github.com/user-attachments/assets/689b6abe-ecd2-4164-9d4e-6b83779b0f8f" />
+使用内置mcp智能体
+<img width="493" height="235" alt="QQ_1757505565713" src="https://github.com/user-attachments/assets/d4e24d68-7ac5-43bf-b1e0-ed98e7a12ee5" />
+然后需要进行配置，点击创建智能体->MCP->添加->手动添加
+<img width="483" height="192" alt="QQ_1757505620373" src="https://github.com/user-attachments/assets/5987b65c-f5d2-4040-9bfd-a556218c8478" />
+
+
+
+
+
+
 ```bash
 python3 /绝对路径/mcp_server.py http://KALI_IP:5000
 ```
@@ -85,44 +97,6 @@ python3 /绝对路径/mcp_server.py http://KALI_IP:5000
 }
 ```
 
-#### [5ire](https://github.com/nanbingxyz/5ire) 桌面应用配置
-添加新的MCP，命令为：
-```bash
-python3 /绝对路径/mcp_server.py http://KALI_IP:5000
-```
-
-## 项目总结
-
-Kali MCP Server是一个轻量级API桥接工具，用于连接MCP客户端与Kali Linux终端，实现安全测试工具的远程调用与管理。本项目是在原始版本基础上进行的二次开发，主要增强了MCP调用Kali工具的种类和数量，并优化了中文用户界面和提示信息。
-
-## 功能特点
-- **AI端点集成**：连接Kali与任意MCP客户端
-- **命令执行API**：安全可控的终端命令执行接口
-- **Web挑战支持**：通过curl等工具与网站交互
-- **全面的工具集**：支持30+专业安全测试工具
-
-## 使用方法
-
-### 1. 环境准备
-- 部署Kali Linux服务器
-- 安装必要依赖包
-- 配置网络连接
-
-### 2. 服务器配置
-```bash
-# 克隆项目仓库
-git clone https://github.com/yourusername/MCP-Kali.git
-cd MCP-Kali
-
-# 安装依赖
-pip install -r requirements.txt
-
-# 启动服务
-python kali_server.py
-```
-
-### 3. 客户端连接
-配置MCP客户端连接到Kali服务器，根据客户端类型设置相应参数。
 
 ## 免责声明
 本项目仅用于教育和合法的安全测试目的。严禁将本工具用于未经授权的访问、利用或恶意活动。作者对任何不当使用不承担责任。
