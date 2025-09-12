@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# This script connect the MCP AI agent to Kali Linux terminal and API Server.
+
+# some of the code here was inspired from https://github.com/whit3rabbit0/project_astro , be sure to check them out
+
 import sys
 import os
 import argparse
@@ -351,7 +355,7 @@ def setup_mcp_server(kali_client: KaliToolsClient) -> FastMCP:
         return kali_client.safe_post("api/tools/subfinder", data)
 
     @mcp.tool()
-    def dirsearch_scan(url: str, wordlist: str = "/usr/share/wordlists/dirsearch/common.txt", threads: int = 10, additional_args: str = "") -> Dict[str, Any]:
+    def dirsearch_scan(url: str, wordlist: str = "/usr/share/wordlists/dirb/common.txt", threads: int = 10, additional_args: str = "") -> Dict[str, Any]:
         """
         执行dirsearch进行目录扫描。
         
@@ -754,7 +758,24 @@ def setup_mcp_server(kali_client: KaliToolsClient) -> FastMCP:
             Command execution results
         """
         return kali_client.execute_command(command)
-
+    
+    @mcp.tool(name="subfinder_httpx_combined")
+    def subfinder_httpx_combined(domain: str) -> Dict[str, Any]:
+        """
+        执行subfinder和httpx的联合命令，不做任何判断，仅传递参数给Kali服务器。
+        
+        Args:
+            domain: 目标域名
+            
+        Returns:
+            命令执行结果
+        """
+        data = {
+            "domain": domain
+        }
+        return kali_client.safe_post("api/tools/subfinder_httpx", data)
+        
+    # 确保工具名称在capabilities中也是正确的
     return mcp
 
 def parse_args():
