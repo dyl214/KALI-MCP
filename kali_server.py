@@ -43,14 +43,16 @@ class CommandExecutor:
         self.timed_out = False
     
     def _read_stdout(self):
-        """持续读取标准输出的线程函数"""
+        """持续读取标准输出的线程函数并在Kali终端上显示"""
         for line in iter(self.process.stdout.readline, ''):
             self.stdout_data += line
+            print(line, end='', flush=True)  # 实时打印到Kali终端
     
     def _read_stderr(self):
-        """持续读取标准错误的线程函数"""
+        """持续读取标准错误的线程函数并在Kali终端上显示"""
         for line in iter(self.process.stderr.readline, ''):
             self.stderr_data += line
+            print(line, end='', flush=True)  # 实时打印到Kali终端
     
     def execute(self) -> Dict[str, Any]:
         """执行命令并处理超时"""
@@ -229,7 +231,7 @@ def dirsearch():
     try:
         params = request.json
         url = params.get("url", "")
-        wordlist = params.get("wordlist", "/usr/share/wordlists/dirsearch/common.txt")
+        wordlist = params.get("wordlist", "/usr/share/wordlists/dirb/common.txt")
         threads = params.get("threads", 10)
         additional_args = params.get("additional_args", "")
         
@@ -1110,10 +1112,35 @@ def get_capabilities():
             {"name": "dig_scan", "description": "Execute dig DNS query tool."},
             {"name": "enum4linux_scan", "description": "Execute Enum4linux Windows/Samba enumeration tool."},
             {"name": "server_health", "description": "Check the health status of the Kali API server."},
-            {"name": "execute_command", "description": "Execute an arbitrary command on the Kali server."}
+            {"name": "execute_command", "description": "Execute an arbitrary command on the Kali server."},
+            {"name": "subfinder_httpx_combined", "description": "Execute subfinder and httpx combined command without any judgment."}
         ]
     }
     return jsonify(capabilities)
+
+@app.route("/mcp/tools/kali_tools/<tool_name>", methods=["POST"]) 
+@app.route("/api/tools/subfinder_httpx", methods=["POST"])
+def subfinder_httpx():
+    """Execute subfinder and httpx combined command without any judgment."""
+    try:
+        params = request.json
+        domain = params.get("domain", "")
+        
+        if not domain:
+            logger.warning("Subfinder_httpx called without domain parameter")
+            return jsonify({
+                "error": "域名参数是必需的"
+            }), 400        
+        
+        command = f"subfinder -d {domain} | httpx-toolkit -title -tech-detect -status-code -follow-redirects"
+        result = execute_command(command)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error in subfinder_httpx endpoint: {str(e)}")
+        logger.error(traceback.format_exc())
+        return jsonify({
+            "error": f"Server error: {str(e)}"
+        }), 500
 
 @app.route("/mcp/tools/kali_tools/<tool_name>", methods=["POST"]) 
 def execute_tool(tool_name):
@@ -1151,7 +1178,8 @@ def execute_tool(tool_name):
             "cewl_scan": "/api/tools/cewl",
             "whois_scan": "/api/tools/whois",
             "dig_scan": "/api/tools/dig",
-            "enum4linux_scan": "/api/tools/enum4linux"
+            "enum4linux_scan": "/api/tools/enum4linux",
+            "subfinder_httpx_combined": "/api/tools/subfinder_httpx"
         }
         
         # Handle special tools that don't have direct API endpoints
