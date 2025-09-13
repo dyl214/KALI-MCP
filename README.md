@@ -56,7 +56,7 @@
 ### 在Kali Linux机器上（作为MCP服务器）
 ```bash
 # 克隆仓库
- git clone https://github.com/dyl214/KALI-MCP.git
+ git clone https://github.com/dyl214/kali-mcp.git
 
 # 启动服务器
  python3 kali_server.py
